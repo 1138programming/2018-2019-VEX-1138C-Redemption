@@ -7,8 +7,10 @@
 class Base : public libIterativeRobot::Subsystem {
   private:
     // Base motors
-    Motor* leftMotor;
-    Motor* rightMotor;
+    Motor* frontLeftMotor;
+    Motor* frontRightMotor;
+    Motor* backLeftMotor;
+    Motor* backRightMotor;
 
   public:
     void initDefaultCommand();
