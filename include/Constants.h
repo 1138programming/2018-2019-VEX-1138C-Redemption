@@ -21,6 +21,7 @@ const int backRightBasePort = 9;
 
 const int leftCapFlipperPort = 4;
 const int rightCapFlipperPort = 5;
+const int puncherMotorPort = 6;
 //const int clawPort = 6;
 
 //Motor and encoder constants

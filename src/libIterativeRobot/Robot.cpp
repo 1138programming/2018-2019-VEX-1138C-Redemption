@@ -8,12 +8,16 @@
 #include "libIterativeRobot/commands/CapFlipperControl.h"
 #include "libIterativeRobot/commands/MoveCapFlipperFor.h"
 #include "libIterativeRobot/commands/DriveWithJoy.h"
+#include "libIterativeRobot/commands/MovePuncherFor.h"
+#include "libIterativeRobot/commands/PuncherControl.h"
+#include "libIterativeRobot/commands/StopPuncher.h"
 
 #include "libIterativeRobot/commands/AutonGroup1.h"
 #include "libIterativeRobot/commands/AutonGroup2.h"
 
 Base*  Robot::base = 0;
 CapFlipper*   Robot::capFlipper = 0;
+Puncher*   Robot::puncher = 0;
 
 AutonChooser* Robot::autonChooser = 0;
 
@@ -26,6 +30,7 @@ Robot::Robot() {
   // Initialize any subsystems
   base = new Base();
   capFlipper  = new CapFlipper();
+  puncher = new Puncher();
   //claw = new Claw();
 
   autonChooser = AutonChooser::getInstance();
@@ -38,6 +43,7 @@ Robot::Robot() {
   libIterativeRobot::JoystickChannel* LeftY = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   libIterativeRobot::JoystickButton* CapFlipperForward = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R1);
   libIterativeRobot::JoystickButton* CapFlipperBackward = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R2);
+  libIterativeRobot::JoystickButton* PuncherShoot = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L1);
 
 
   // Add commands to be run to buttons
@@ -47,6 +53,8 @@ Robot::Robot() {
 
   CapFlipperForward->whileHeld(new CapFlipperControl(true));
   CapFlipperBackward->whileHeld(new CapFlipperControl(false));
+
+  PuncherShoot->whileHeld(new PuncherControl());
 
   //ClawOpen->whileHeld(new ClawControl(true));
   //ClawClose->whileHeld(new ClawControl(false));
