@@ -11,6 +11,9 @@
 #include "libIterativeRobot/commands/MovePuncherFor.h"
 #include "libIterativeRobot/commands/PuncherControl.h"
 #include "libIterativeRobot/commands/StopPuncher.h"
+#include "libIterativeRobot/commands/StopIntake.h"
+#include "libIterativeRobot/commands/MoveIntakeFor.h"
+#include "libIterativeRobot/commands/IntakeControl.h"
 
 #include "libIterativeRobot/commands/AutonGroup1.h"
 #include "libIterativeRobot/commands/AutonGroup2.h"
@@ -18,6 +21,7 @@
 Base*  Robot::base = 0;
 CapFlipper*   Robot::capFlipper = 0;
 Puncher*   Robot::puncher = 0;
+Intake*   Robot::intake = 0;
 
 AutonChooser* Robot::autonChooser = 0;
 
@@ -31,6 +35,7 @@ Robot::Robot() {
   base = new Base();
   capFlipper  = new CapFlipper();
   puncher = new Puncher();
+  intake = new Intake();
   //claw = new Claw();
 
   autonChooser = AutonChooser::getInstance();
@@ -43,7 +48,11 @@ Robot::Robot() {
   libIterativeRobot::JoystickChannel* LeftY = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   libIterativeRobot::JoystickButton* CapFlipperForward = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R1);
   libIterativeRobot::JoystickButton* CapFlipperBackward = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R2);
-  libIterativeRobot::JoystickButton* PuncherShoot = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L1);
+  libIterativeRobot::JoystickButton* PuncherShoot = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
+  libIterativeRobot::JoystickButton* PuncherPrime = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_DOWN);
+  libIterativeRobot::JoystickButton* IntakeIn = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L2);
+  libIterativeRobot::JoystickButton* IntakeOut = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L1);
+  libIterativeRobot::JoystickButton* IntakeRotation = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_X);
 
 
   // Add commands to be run to buttons
@@ -51,10 +60,17 @@ Robot::Robot() {
   RightY->whilePastThreshold(driveCommand);
   LeftY->whilePastThreshold(driveCommand);
 
+
+
   CapFlipperForward->whileHeld(new CapFlipperControl(true));
   CapFlipperBackward->whileHeld(new CapFlipperControl(false));
 
   PuncherShoot->whileHeld(new PuncherControl());
+  PuncherPrime->whenPressed(new MovePuncherFor(750));
+
+  IntakeIn->whileHeld(new IntakeControl(true));
+  IntakeOut->whileHeld(new IntakeControl(false));
+  IntakeRotation->whenPressed(new MoveIntakeFor(750));
 
   //ClawOpen->whileHeld(new ClawControl(true));
   //ClawClose->whileHeld(new ClawControl(false));

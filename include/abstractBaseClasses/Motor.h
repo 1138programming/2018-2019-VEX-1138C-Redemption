@@ -23,7 +23,7 @@ enum MotorType {
 
 class Motor {
   private:
-    const static int defaultSlewStep = 1;
+    const static int defaultSlewStep = 28;
 
     std::uint8_t channel; // Motor channel
     pros::motor_gearset_e_t gearset; // v5 motor gearset

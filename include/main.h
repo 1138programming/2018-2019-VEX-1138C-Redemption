@@ -47,6 +47,8 @@
 #include "libIterativeRobot/subsystems/CapFlipper.h"
 #include "libIterativeRobot/subsystems/Puncher.h"
 #include "libIterativeRobot/subsystems/Base.h"
+#include "libIterativeRobot/subsystems/Intake.h"
+
 //#include "libIterativeRobot/subsystems/Claw.h"
 #include "libIterativeRobot/subsystems/ExampleSubsystem.h"
 

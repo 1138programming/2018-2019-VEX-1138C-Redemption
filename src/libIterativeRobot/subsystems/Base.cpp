@@ -1,4 +1,5 @@
 #include "main.h"
+#include "libIterativeRobot/commands/StopBase.h"
 
 Base::Base() {
   // Set up motors
@@ -10,7 +11,7 @@ Base::Base() {
 
 void Base::initDefaultCommand() {
   // Setup up a default command here
-  //setDefaultCommand(new StopBase());
+  setDefaultCommand(new StopBase());
 }
 
 /**
@@ -20,8 +21,8 @@ void Base::initDefaultCommand() {
  */
 void Base::move(int left, int right) {
   frontLeftMotor->setSpeed(left);
-  frontRightMotor->setSpeed(right);
+  frontRightMotor->setSpeed(-right);
   backLeftMotor->setSpeed(left);
-  backRightMotor->setSpeed(right);
+  backRightMotor->setSpeed(-right);
 
 }
