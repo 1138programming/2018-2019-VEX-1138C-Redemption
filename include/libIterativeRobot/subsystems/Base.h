@@ -3,6 +3,7 @@
 
 #include "./Subsystem.h"
 #include "api.h"
+#include "Constants.h"
 
 class Base : public libIterativeRobot::Subsystem {
   private:
@@ -15,6 +16,8 @@ class Base : public libIterativeRobot::Subsystem {
   public:
     void initDefaultCommand();
     void move(int left, int right);
+    void moveBaseTo(int leftTarget, int rightTarget, int motorSpeed=KMaxMotorSpeed);
+    bool baseAtTarget();
     Base();
 };
 

@@ -5,7 +5,8 @@
 
 #include "libIterativeRobot/commands/StopBase.h"
 #include "libIterativeRobot/commands/StopCapFlipper.h"
-#include "libIterativeRobot/commands/CapFlipperControl.h"
+#include "libIterativeRobot/commands/CapFlipperControlForward.h"
+#include "libIterativeRobot/commands/CapFlipperControlBackward.h"
 #include "libIterativeRobot/commands/MoveCapFlipperFor.h"
 #include "libIterativeRobot/commands/DriveWithJoy.h"
 #include "libIterativeRobot/commands/MovePuncherFor.h"
@@ -13,10 +14,11 @@
 #include "libIterativeRobot/commands/StopPuncher.h"
 #include "libIterativeRobot/commands/StopIntake.h"
 #include "libIterativeRobot/commands/MoveIntakeFor.h"
-#include "libIterativeRobot/commands/IntakeControl.h"
+#include "libIterativeRobot/commands/IntakeControlIn.h"
+#include "libIterativeRobot/commands/IntakeControlOut.h"
+#include "libIterativeRobot/commands/MoveCapFlipper180Degrees.h"
 
-#include "libIterativeRobot/commands/AutonGroup1.h"
-#include "libIterativeRobot/commands/AutonGroup2.h"
+#include "libIterativeRobot/commands/FlagPlatformAuton.h"
 
 Base*  Robot::base = 0;
 CapFlipper*   Robot::capFlipper = 0;
@@ -53,6 +55,7 @@ Robot::Robot() {
   libIterativeRobot::JoystickButton* IntakeIn = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L2);
   libIterativeRobot::JoystickButton* IntakeOut = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L1);
   libIterativeRobot::JoystickButton* IntakeRotation = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_X);
+  libIterativeRobot::JoystickButton* CapFlipperFull = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_Y);
 
 
   // Add commands to be run to buttons
@@ -62,14 +65,15 @@ Robot::Robot() {
 
 
 
-  CapFlipperForward->whileHeld(new CapFlipperControl(true));
-  CapFlipperBackward->whileHeld(new CapFlipperControl(false));
+  CapFlipperForward->whileHeld(new CapFlipperControlForward());
+  CapFlipperBackward->whileHeld(new CapFlipperControlBackward());
+  CapFlipperFull->whenPressed(new MoveCapFlipper180Degrees());
 
   PuncherShoot->whileHeld(new PuncherControl());
   PuncherPrime->whenPressed(new MovePuncherFor(750));
 
-  IntakeIn->whileHeld(new IntakeControl(true));
-  IntakeOut->whileHeld(new IntakeControl(false));
+  IntakeIn->whileHeld(new IntakeControlIn());
+  IntakeOut->whileHeld(new IntakeControlOut());
   IntakeRotation->whenPressed(new MoveIntakeFor(750));
 
   //ClawOpen->whileHeld(new ClawControl(true));
@@ -89,11 +93,11 @@ void Robot::autonInit() {
   switch (autonChooser->getAutonChoice()) {
     case 0:
       printf("Running group %d\n", 1);
-      autonGroup = new AutonGroup1();
+      autonGroup = new FlagPlatformAuton();
       break;
     case 1:
       printf("Running group %d\n", 2);
-      autonGroup = new AutonGroup2();
+      autonGroup = new FlagPlatformAuton();
       break;
   }
   autonGroup->run();
