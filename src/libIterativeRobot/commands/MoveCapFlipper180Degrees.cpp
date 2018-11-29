@@ -17,10 +17,18 @@ void MoveCapFlipper180Degrees::initialize() {
   // constructor
   printf("Initiating move capFlipper\n");
   startTime = pros::millis();
+
+  Robot::capFlipper->move180(true);
 }
 
-void MoveCapFlipper180Degrees::execute() {
-  Robot::capFlipper->move180();
+void MoveCapFlipper180Degrees::execute() { // TODO Fix states
+  if(abs(Motor::getMotor(leftCapFlipperPort)->getMotorObject()->get_target_position() - Motor::getMotor(leftCapFlipperPort)->getMotorObject()->get_position()) > 0){
+    Robot::capFlipper->move180(true);
+  }
+  else
+  {
+    Robot::capFlipper->move180(false);
+  }
 }
 
 bool MoveCapFlipper180Degrees::isFinished() {

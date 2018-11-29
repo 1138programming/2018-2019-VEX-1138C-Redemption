@@ -22,14 +22,14 @@ void CapFlipper::move(int speed) {
   leftCapFlipper->setSpeed(speed);
   rightCapFlipper->setSpeed(-speed);
 }
-void CapFlipper::move180(int speed1, int speed2) {
-  if (abs(leftCapFlipper->getMotorObject()->get_target_position() - leftCapFlipper->getMotorObject()->get_position()) != 0) {
-    leftCapFlipper->getMotorObject()->move_relative(90, speed1); // TODO: Move last argument to a variable
-    rightCapFlipper->getMotorObject()->move_relative(90, speed1);
+void CapFlipper::move180(bool part, int speed1, int speed2) {
+  if (part) {
+    leftCapFlipper->getMotorObject()->move_relative(450, speed1);
+    rightCapFlipper->getMotorObject()->move_relative(450, speed1);
   }
   else {
-    leftCapFlipper->getMotorObject()->move_relative(90, speed2); // TODO: Move last argument to a variable
-    rightCapFlipper->getMotorObject()->move_relative(90, speed2);
+    leftCapFlipper->getMotorObject()->move_relative(450, speed2);
+    rightCapFlipper->getMotorObject()->move_relative(450, speed2);
   }
 }
 

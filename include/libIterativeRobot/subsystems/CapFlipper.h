@@ -16,7 +16,7 @@ class CapFlipper : public libIterativeRobot::Subsystem {
   public:
     void initDefaultCommand();
     void move(int speed);
-    void move180(int speed1 = KMaxMotorSpeed, int speed2 = (int)(KMaxMotorSpeed * 0.8));
+    void move180(bool part, int speed1 = KMaxMotorSpeed, int speed2 = (int)(KMaxMotorSpeed * 0.8));
     bool capFlipperAtTarget();
     CapFlipper();
 };

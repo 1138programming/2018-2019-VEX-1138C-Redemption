@@ -6,8 +6,9 @@
 
 FlagPlatformAuton::FlagPlatformAuton() {
 
-  addSequentialCommand(new DriveToPosition(0, -0, 127));
-  addParallelCommand(new MoveIntakeFor(1000, -127));
-  addSequentialCommand(new MovePuncherFor(1000));
+  addSequentialCommand(new DriveToPosition(0, -0, 127)); // Drive, TODO delete this is if it not needed.
+  addParallelCommand(new MoveIntakeFor(1000, -127)); // Prime
+  addSequentialCommand(new MovePuncherFor(1000)); // PuncherShoot
+  addSequentialCommand(new DriveToPosition(100, -100, 127));
 
 }

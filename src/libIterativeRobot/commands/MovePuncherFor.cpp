@@ -33,6 +33,7 @@ bool MovePuncherFor::isFinished() {
 void MovePuncherFor::end() {
   // Code that runs when isFinished() returns true.
   Robot::puncher->move(0);
+  Robot::puncher->brake();
 }
 
 void MovePuncherFor::interrupted() {
