@@ -7,7 +7,6 @@ MovePuncherFor::MovePuncherFor(unsigned int duration, int speed) {
   this->speed = speed;
 
   requires(Robot::puncher);
-  this->priority = 1;
 }
 
 bool MovePuncherFor::canRun() {
@@ -33,7 +32,6 @@ bool MovePuncherFor::isFinished() {
 void MovePuncherFor::end() {
   // Code that runs when isFinished() returns true.
   Robot::puncher->move(0);
-  Robot::puncher->brake();
 }
 
 void MovePuncherFor::interrupted() {

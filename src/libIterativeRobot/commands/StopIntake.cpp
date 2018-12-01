@@ -23,7 +23,7 @@ void StopIntake::execute() {
 }
 
 bool StopIntake::isFinished() {
-  return false;
+  return true;
 }
 
 void StopIntake::end() {

@@ -107,7 +107,7 @@ void Robot::autonInit() {
 void Robot::autonPeriodic() {
   //printf("Default autonPeriodic() function\n");
   libIterativeRobot::EventScheduler::getInstance()->update();
-  Motor::periodicUpdate();
+  //Motor::periodicUpdate();
   //PIDController::loopAll();
 }
 

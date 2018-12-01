@@ -18,5 +18,5 @@ void Intake::initDefaultCommand() {
  */
 void Intake::move(int speed) {
   //printf("Intake speed is %d\n", speed);
-  intakeMotor->setSpeed(speed);
+  intakeMotor->getMotorObject()->move_velocity(speed);
 }

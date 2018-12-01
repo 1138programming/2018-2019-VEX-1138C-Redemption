@@ -21,7 +21,7 @@ void StopBase::execute() {
 }
 
 bool StopBase::isFinished() {
-  return false;
+  return true;
 }
 
 void StopBase::end() {

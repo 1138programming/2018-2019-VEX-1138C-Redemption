@@ -6,6 +6,7 @@ DriveToPosition::DriveToPosition(int leftTarget, int rightTarget) {
   this->leftTarget = leftTarget;
   this->rightTarget = rightTarget;
   this->motorSpeed = 0;
+  this->priority = 51;
 }
 
 DriveToPosition::DriveToPosition(int leftTarget, int rightTarget, int motorSpeed) {
@@ -13,10 +14,11 @@ DriveToPosition::DriveToPosition(int leftTarget, int rightTarget, int motorSpeed
   this->leftTarget = leftTarget;
   this->rightTarget = rightTarget;
   this->motorSpeed = motorSpeed;
+  this->priority = 51;
 }
 
 bool DriveToPosition::canRun() {
-  printf("DriveToPosition(%d, %d)\n", leftTarget, rightTarget);
+  printf("DriveToPosition(%f, %f)\n", leftTarget, rightTarget);
   return true; // This is the default value anyways, so this method can be removed
 }
 
@@ -32,7 +34,7 @@ void DriveToPosition::execute() {
 }
 
 bool DriveToPosition::isFinished() {
-  return Robot::base->baseAtTarget() || pros::millis() > endTime; // Makes sure that the base has finished before moving on.
+  return Robot::base->baseAtTarget(); //|| pros::millis() > endTime; // Makes sure that the base has finished before moving on.
 }
 
 void DriveToPosition::end() {

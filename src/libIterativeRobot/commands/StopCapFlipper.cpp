@@ -23,7 +23,7 @@ void StopCapFlipper::execute() {
 }
 
 bool StopCapFlipper::isFinished() {
-  return false;
+  return true;
 }
 
 void StopCapFlipper::end() {

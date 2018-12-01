@@ -26,10 +26,10 @@ void Base::initDefaultCommand() {
  }
 
 void Base::move(int left, int right) {
-  frontLeftMotor->setSpeed(left);
-  frontRightMotor->setSpeed(-right);
-  backLeftMotor->setSpeed(left);
-  backRightMotor->setSpeed(-right);
+  frontLeftMotor->getMotorObject()->move_velocity(left);
+  frontRightMotor->getMotorObject()->move_velocity(-right);
+  backLeftMotor->getMotorObject()->move_velocity(left);
+  backRightMotor->getMotorObject()->move_velocity(-right);
 
 }
 
@@ -37,6 +37,6 @@ void Base::moveBaseTo(int leftTarget, int rightTarget, int motorSpeed) {
   frontLeftMotor->getMotorObject()->move_relative(leftTarget, motorSpeed ? motorSpeed : 150); // TODO: Move last argument to a variable
   backLeftMotor->getMotorObject()->move_relative(leftTarget, motorSpeed ?  motorSpeed : 150);
 
-  frontRightMotor->getMotorObject()->move_relative(rightTarget, motorSpeed ? motorSpeed : 150);
-  backRightMotor->getMotorObject()->move_relative(rightTarget, motorSpeed ? motorSpeed : 150);
+  frontRightMotor->getMotorObject()->move_relative(-rightTarget, motorSpeed ? motorSpeed : 150);
+  backRightMotor->getMotorObject()->move_relative(-rightTarget, motorSpeed ? motorSpeed : 150);
 }

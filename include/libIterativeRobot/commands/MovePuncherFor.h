@@ -11,7 +11,7 @@ class MovePuncherFor: public libIterativeRobot::Command {
     bool isFinished();
     void end();
     void interrupted();
-    MovePuncherFor(unsigned int duration, int speed = 127);
+    MovePuncherFor(unsigned int duration, int speed = 200);
   private:
     unsigned int duration;
     unsigned int speed;

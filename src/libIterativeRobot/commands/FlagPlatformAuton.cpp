@@ -5,10 +5,15 @@
 #include "libIterativeRobot/commands/MovePuncherFor.h"
 
 FlagPlatformAuton::FlagPlatformAuton() {
-
-  addSequentialCommand(new DriveToPosition(0, -0, 127)); // Drive, TODO delete this is if it not needed.
-  addParallelCommand(new MoveIntakeFor(1000, -127)); // Prime
+  //addParallelCommand(new MoveIntakeFor(1000, -200)); // Prime
   addSequentialCommand(new MovePuncherFor(1000)); // PuncherShoot
-  addSequentialCommand(new DriveToPosition(100, -100, 127));
+  addSequentialCommand(new DriveToPosition(-410, 410)); // Rotate a bit // +,- for red
+  addSequentialCommand(new DriveToPosition(3300, 3300)); // Forward to the cap
+
+  addParallelCommand(new MoveIntakeFor(1500, 200)); // Prime
+  addSequentialCommand(new DriveToPosition(-600, -600)); // Forward to the cap
+  addSequentialCommand(new DriveToPosition(700, -700)); // Rotate a bit // -,+ for red
+
+  addSequentialCommand(new DriveToPosition(2300, 2300)); // Forward to the cap // 2000 for red, 2300 for blue
 
 }

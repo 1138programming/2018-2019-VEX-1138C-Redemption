@@ -14,7 +14,6 @@ class Puncher : public libIterativeRobot::Subsystem {
   public:
     void initDefaultCommand();
     void move(int speed);
-    void brake();
     Puncher();
 };
 

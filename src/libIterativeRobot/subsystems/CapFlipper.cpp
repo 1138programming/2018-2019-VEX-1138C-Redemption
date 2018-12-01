@@ -19,8 +19,8 @@ void CapFlipper::initDefaultCommand() {
  */
 void CapFlipper::move(int speed) {
   //printf("CapFlipper speed is %d\n", speed);
-  leftCapFlipper->setSpeed(speed);
-  rightCapFlipper->setSpeed(-speed);
+  leftCapFlipper->getMotorObject()->move_velocity(speed);
+  rightCapFlipper->getMotorObject()->move_velocity(-speed);
 }
 void CapFlipper::move180(bool part, int speed1, int speed2) {
   if (part) {

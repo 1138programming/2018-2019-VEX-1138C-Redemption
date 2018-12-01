@@ -16,8 +16,6 @@ Motor::Motor(std::uint8_t channel) {
   gearset = defaultGearset;
   encoderUnits = defaultEncoderUnits;
   speed = 0;
-  slewedSpeed = 0;
-  slewStep = defaultSlewStep;
   multiplier = 1;
   following = false;
   master = NULL;
@@ -63,15 +61,13 @@ void Motor::setSpeed(int speed) {
   if (following)
     return;
 
-  this->speed = speed * multiplier;
-
   // Confine speed to between -127 to 127
   //speed = threshold((int)(confineToRange(speed, -KMaxMotorSpeed, KMaxMotorSpeed) * multiplier), this->threshold);
 
   // Set the speed of the follower motors to the same speed
   for (unsigned int i = 0; i < numFollowers; i++) {
       if (followers[i] != NULL) {
-        followers[i]->speed = speed * followers[i]->multiplier;
+        followers[i]->speed = speed;
       }
   }
 }
@@ -124,13 +120,12 @@ int Motor::getChannel() {
 }
 
 std::int32_t Motor::getEncoderValue() {
-  if (motorType == v4) {
-    if (encoder != NULL)
-      return encoder->get_value() * abs(multiplier) / multiplier;
+  if (this->motorType == v4) {
+    if (this->encoder != NULL)
+      return this->encoder->get_value();
   } else {
-    //std::uint32_t time = pros::millis();
-    //return this->v5Motor->get_raw_position(&time);
-    return v5Motor->get_position() * abs(multiplier) / multiplier;
+    std::uint32_t time = pros::millis();
+    return this->v5Motor->get_raw_position(&time);
   }
   return 0;
 }
@@ -147,23 +142,13 @@ pros::Motor* Motor::getMotorObject() {
 // doesn't work
 int Motor::updateSlewRate(int targetSpeed) {
   // A bit of motor slewing to make sure that we don't stall
-  int deltaSpeed = targetSpeed - slewedSpeed;
-  int sign = deltaSpeed < 0 ? -1 : 1;
-  if (abs(deltaSpeed) > slewStep) {
-    slewedSpeed += slewStep * sign;
-  } else {
-    slewedSpeed = targetSpeed;
-  }
-
-  return slewedSpeed;
 }
 
 void Motor::move() {
-  //printf("Motor speed is %d\n", speed);
   if (motorType == v4)
     v4Motor->set_value(updateSlewRate(speed));
   else
-    v5Motor->move(updateSlewRate(speed));
+    v5Motor->move(speed);
 }
 
 void Motor::periodicUpdate() {

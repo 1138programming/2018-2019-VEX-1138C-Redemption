@@ -23,7 +23,7 @@ void StopPuncher::execute() {
 }
 
 bool StopPuncher::isFinished() {
-  return false;
+  return true;
 }
 
 void StopPuncher::end() {
