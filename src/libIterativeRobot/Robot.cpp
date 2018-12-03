@@ -20,6 +20,8 @@
 #include "libIterativeRobot/commands/CapFlipperWithJoy.h"
 
 #include "libIterativeRobot/commands/FlagPlatformAuton.h"
+#include "libIterativeRobot/commands/FlagPlatformAutonBlue.h"
+#include "libIterativeRobot/commands/FrontTile.h"
 
 Base*  Robot::base = 0;
 CapFlipper*   Robot::capFlipper = 0;
@@ -97,8 +99,12 @@ void Robot::autonInit() {
       autonGroup = new FlagPlatformAuton();
       break;
     case 1:
+      printf("Running group %d\n", 1);
+      autonGroup = new FlagPlatformAutonBlue();
+      break;
+    case 2:
       printf("Running group %d\n", 2);
-      autonGroup = new FlagPlatformAuton();
+      autonGroup = new FrontTile();
       break;
   }
   autonGroup->run();

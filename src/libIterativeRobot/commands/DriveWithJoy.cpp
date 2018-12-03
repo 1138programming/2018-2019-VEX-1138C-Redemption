@@ -14,8 +14,8 @@ bool DriveWithJoy::canRun() {
 void DriveWithJoy::initialize() {
   // Perform any initialization steps for this command here, not in the
   // constructor
-  rightSideSpeed = Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) - Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
-  leftSideSpeed = Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) + Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+  rightSideSpeed = 2 * (Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) - Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X));
+  leftSideSpeed = 2 * (Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) + Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X));
 }
 
 void DriveWithJoy::execute() {

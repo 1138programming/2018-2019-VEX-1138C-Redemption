@@ -14,7 +14,9 @@ AutonChooser* AutonChooser::instance;
 AutonChooser::AutonChooser() {
   auton = 0;
 
-  autonNames.push_back("Red Auton\0");
+  autonNames.push_back("Red Back");
+  autonNames.push_back("Blue Back");
+  autonNames.push_back("Front Tile");
   //autonNames.push_back("Blue Auton\0");
 
   numAutons = autonNames.size();
