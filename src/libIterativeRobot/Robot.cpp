@@ -4,10 +4,10 @@
 #include "libIterativeRobot/events/JoystickChannel.h"
 
 #include "libIterativeRobot/commands/StopBase.h"
-#include "libIterativeRobot/commands/StopCapFlipper.h"
-#include "libIterativeRobot/commands/CapFlipperControlForward.h"
-#include "libIterativeRobot/commands/CapFlipperControlBackward.h"
-#include "libIterativeRobot/commands/MoveCapFlipperFor.h"
+#include "libIterativeRobot/commands/StopAngleAdjustment.h"
+#include "libIterativeRobot/commands/AngleAdjustmentControlUp.h"
+#include "libIterativeRobot/commands/AngleAdjustmentControlDown.h"
+#include "libIterativeRobot/commands/MoveAngleAdjustmentFor.h"
 #include "libIterativeRobot/commands/DriveWithJoy.h"
 #include "libIterativeRobot/commands/MovePuncherFor.h"
 #include "libIterativeRobot/commands/PuncherControl.h"
@@ -16,15 +16,14 @@
 #include "libIterativeRobot/commands/MoveIntakeFor.h"
 #include "libIterativeRobot/commands/IntakeControlIn.h"
 #include "libIterativeRobot/commands/IntakeControlOut.h"
-#include "libIterativeRobot/commands/MoveCapFlipper180Degrees.h"
-#include "libIterativeRobot/commands/CapFlipperWithJoy.h"
+#include "libIterativeRobot/commands/AngleAdjustmentWithJoy.h"
 
 #include "libIterativeRobot/commands/FlagPlatformAuton.h"
 #include "libIterativeRobot/commands/FlagPlatformAutonBlue.h"
 #include "libIterativeRobot/commands/FrontTile.h"
 
 Base*  Robot::base = 0;
-CapFlipper*   Robot::capFlipper = 0;
+AngleAdjustment*   Robot::angleAdjustment = 0;
 Puncher*   Robot::puncher = 0;
 Intake*   Robot::intake = 0;
 
@@ -38,7 +37,7 @@ Robot::Robot() {
   autonGroup = NULL;
   // Initialize any subsystems
   base = new Base();
-  capFlipper  = new CapFlipper();
+  angleAdjustment  = new AngleAdjustment();
   puncher = new Puncher();
   intake = new Intake();
   //claw = new Claw();
@@ -53,25 +52,20 @@ Robot::Robot() {
   libIterativeRobot::JoystickChannel* LeftY = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   libIterativeRobot::JoystickChannel* RightX = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_RIGHT_X);
   libIterativeRobot::JoystickChannel* LeftX = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_X);
-  libIterativeRobot::JoystickButton* CapFlipperForward = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R1);
-  libIterativeRobot::JoystickButton* CapFlipperBackward = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R2);
-  libIterativeRobot::JoystickButton* PuncherShoot = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_X);
-  libIterativeRobot::JoystickButton* PuncherPrime = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_Y);
+  // libIterativeRobot::JoystickButton* AngleAdjustmentUp = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R1);
+  // libIterativeRobot::JoystickButton* AngleAdjustmentDown = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R2);
+  libIterativeRobot::JoystickButton* PuncherShoot = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R1);
+  libIterativeRobot::JoystickButton* PuncherPrime = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R2);
   libIterativeRobot::JoystickButton* IntakeIn = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L1);
   libIterativeRobot::JoystickButton* IntakeOut = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L2);
-  libIterativeRobot::JoystickButton* CapFlipperFull = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
 
   DriveWithJoy* driveCommand = new DriveWithJoy();
-  CapFlipperWithJoy* capFlipCommand = new CapFlipperWithJoy();
+  AngleAdjustmentWithJoy* angleAdjustmentCommand = new AngleAdjustmentWithJoy();
   // Add commands to be run to buttons
 
-  RightY->whilePastThreshold(capFlipCommand);
+  RightY->whilePastThreshold(angleAdjustmentCommand);
   LeftY->whilePastThreshold(driveCommand);
   LeftX->whilePastThreshold(driveCommand);
-
-  CapFlipperForward->whileHeld(new CapFlipperControlForward());
-  CapFlipperBackward->whileHeld(new CapFlipperControlBackward());
-  CapFlipperFull->whenPressed(new MoveCapFlipper180Degrees());
 
   PuncherShoot->whileHeld(new PuncherControl());
   PuncherPrime->whenPressed(new MovePuncherFor(750));

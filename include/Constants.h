@@ -14,15 +14,14 @@
 #define MAX_FOLLOWERS 3
 
 // Motor ports
-const int frontLeftBasePort = 2;
+const int frontLeftBasePort = 11;
 const int frontRightBasePort = 12;
-const int backLeftBasePort = 1;
-const int backRightBasePort = 11;
+const int backLeftBasePort = 19;
+const int backRightBasePort = 18;
 
-const int leftCapFlipperPort = 9;
-const int rightCapFlipperPort = 10;
-const int puncherMotorPort = 19;
-const int intakeMotorPort = 20;
+const int angleAdjustmentMotorPort = 17;
+const int puncherMotorPort = 20;
+const int intakeMotorPort = 15;
 //const int clawPort = 6;
 
 //Motor and encoder constants
