@@ -19,7 +19,7 @@ void PuncherControl::initialize() {
 
 void PuncherControl::execute() {
   //printf("Puncher control running\n");
-  Robot::puncher->move(KMaxMotorSpeed);
+  Robot::puncher->move(-KMaxMotorSpeed);
 }
 
 bool PuncherControl::isFinished() {

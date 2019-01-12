@@ -22,7 +22,7 @@ void MovePuncherFor::initialize() {
 }
 
 void MovePuncherFor::execute() {
-    Robot::puncher->move(speed);
+    Robot::puncher->move(-speed);
 }
 
 bool MovePuncherFor::isFinished() {
