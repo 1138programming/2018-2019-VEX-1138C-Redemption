@@ -27,6 +27,7 @@ const int intakeMotorPort = 5;
 //Motor and encoder constants
 const int KMaxMotorSpeed = 200;
 const int KMaxJoystickValue = 200;
+const int KMotorPosition = 200;
 const int encoderTicks = 360; // Encoder ticks in one revolution
 const float rotationsPerInch = 31.400156410256; // TODO check if this is correct
 

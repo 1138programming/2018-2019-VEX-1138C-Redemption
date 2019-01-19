@@ -7,6 +7,8 @@
 #include "libIterativeRobot/commands/StopAngleAdjustment.h"
 #include "libIterativeRobot/commands/AngleAdjustmentControlUp.h"
 #include "libIterativeRobot/commands/AngleAdjustmentControlDown.h"
+#include "libIterativeRobot/commands/AngleAdjustmentControlPosition1.h"
+#include "libIterativeRobot/commands/AngleAdjustmentControlPosition2.h"
 #include "libIterativeRobot/commands/MoveAngleAdjustmentFor.h"
 #include "libIterativeRobot/commands/DriveWithJoy.h"
 #include "libIterativeRobot/commands/MovePuncherFor.h"
@@ -52,8 +54,8 @@ Robot::Robot() {
   libIterativeRobot::JoystickChannel* LeftY = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   libIterativeRobot::JoystickChannel* RightX = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_RIGHT_X);
   libIterativeRobot::JoystickChannel* LeftX = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_X);
-  // libIterativeRobot::JoystickButton* AngleAdjustmentUp = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R1);
-  // libIterativeRobot::JoystickButton* AngleAdjustmentDown = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R2);
+  libIterativeRobot::JoystickButton* angleAdjustmentControlPosition1 = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_DOWN);
+  libIterativeRobot::JoystickButton* angleAdjustmentControlPosition2= new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
   libIterativeRobot::JoystickButton* PuncherShoot = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R1);
   libIterativeRobot::JoystickButton* PuncherPrime = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R2);
   libIterativeRobot::JoystickButton* IntakeOut = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L2);
@@ -69,6 +71,9 @@ Robot::Robot() {
 
   PuncherShoot->whileHeld(new PuncherControl());
   PuncherPrime->whenPressed(new MovePuncherFor(750));
+
+  angleAdjustmentControlPosition1->whenPressed(new AngleAdjustmentControlPosition1(750));
+  angleAdjustmentControlPosition2->whenPressed(new AngleAdjustmentControlPosition2(750));
 
   IntakeIn->whileHeld(new IntakeControlIn());
   IntakeOut->whileHeld(new IntakeControlOut());
