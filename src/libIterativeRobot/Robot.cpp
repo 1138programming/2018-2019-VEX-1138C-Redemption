@@ -7,8 +7,6 @@
 #include "libIterativeRobot/commands/StopAngleAdjustment.h"
 #include "libIterativeRobot/commands/AngleAdjustmentControlUp.h"
 #include "libIterativeRobot/commands/AngleAdjustmentControlDown.h"
-#include "libIterativeRobot/commands/AngleAdjustmentControlPosition1.h"
-#include "libIterativeRobot/commands/AngleAdjustmentControlPosition2.h"
 #include "libIterativeRobot/commands/MoveAngleAdjustmentFor.h"
 #include "libIterativeRobot/commands/DriveWithJoy.h"
 #include "libIterativeRobot/commands/MovePuncherFor.h"
@@ -72,8 +70,8 @@ Robot::Robot() {
   PuncherShoot->whileHeld(new PuncherControl());
   PuncherPrime->whenPressed(new MovePuncherFor(750));
 
-  angleAdjustmentControlPosition1->whenPressed(new AngleAdjustmentControlPosition1(750));
-  angleAdjustmentControlPosition2->whenPressed(new AngleAdjustmentControlPosition2(750));
+  angleAdjustmentControlPosition1->whenPressed(new MoveAngleAdjustmentFor(750));
+  angleAdjustmentControlPosition2->whenPressed(new MoveAngleAdjustmentFor(750));
 
   IntakeIn->whileHeld(new IntakeControlIn());
   IntakeOut->whileHeld(new IntakeControlOut());

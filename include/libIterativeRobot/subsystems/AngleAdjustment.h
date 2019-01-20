@@ -8,14 +8,14 @@
 class AngleAdjustment : public libIterativeRobot::Subsystem {
   private:
     // Arm motors
-    Motor* angleAdjustmentMotor;
+    Motor* angleAdjustmentMotor1;
+    Motor* angleAdjustmentMotor2;
 
     //PIDController* armController;
 
   public:
     void initDefaultCommand();
     void move(int speed);
-    void move180(bool part, int speed1 = KMaxMotorSpeed, int speed2 = (int)(KMaxMotorSpeed * 0.8));
     bool angleAdjustmentAtTarget();
     AngleAdjustment();
 };

@@ -19,7 +19,8 @@ const int frontRightBasePort = 2;
 const int backLeftBasePort = 3;
 const int backRightBasePort = 4;
 
-const int angleAdjustmentMotorPort = 6;
+const int angleAdjustmentMotor1Port = 6;
+const int angleAdjustmentMotor2Port = 8;
 const int puncherMotorPort = 7;
 const int intakeMotorPort = 5;
 //const int clawPort = 6;

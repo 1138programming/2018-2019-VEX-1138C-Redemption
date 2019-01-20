@@ -3,7 +3,8 @@
 
 AngleAdjustment::AngleAdjustment() {
   // Get arm motors
-  angleAdjustmentMotor = Motor::getMotor(angleAdjustmentMotorPort);
+  angleAdjustmentMotor1 = Motor::getMotor(angleAdjustmentMotor1Port);
+  angleAdjustmentMotor2 = Motor::getMotor(angleAdjustmentMotor2Port);
   //armMotor->reverse();
 }
 
@@ -18,17 +19,10 @@ void AngleAdjustment::initDefaultCommand() {
  */
 void AngleAdjustment::move(int speed) {
   //printf("AngleAdjustment speed is %d\n", speed);
-  angleAdjustmentMotor->getMotorObject()->move_velocity(speed);
-}
-void AngleAdjustment::move180(bool part, int speed1, int speed2) {
-  if (part) {
-    angleAdjustmentMotor->getMotorObject()->move_relative(450, speed1);
-  }
-  else {
-    angleAdjustmentMotor->getMotorObject()->move_relative(450, speed2);
-  }
+  angleAdjustmentMotor1->getMotorObject()->move_velocity(speed);
+  angleAdjustmentMotor2->getMotorObject()->move_velocity(-speed);
 }
 
 bool AngleAdjustment::angleAdjustmentAtTarget() {
-  return abs(angleAdjustmentMotor->getMotorObject()->get_target_position() - angleAdjustmentMotor->getMotorObject()->get_position()) <= 5; // Tune threshold and make a varaible
+  return abs(angleAdjustmentMotor1->getMotorObject()->get_target_position() - angleAdjustmentMotor1->getMotorObject()->get_position()) <= 5; // Tune threshold and make a varaible
 }
