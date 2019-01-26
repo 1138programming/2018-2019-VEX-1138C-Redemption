@@ -48,7 +48,8 @@ Robot::Robot() {
   partnerController = new pros::Controller(pros::E_CONTROLLER_PARTNER);
 
   // Define buttons and channels
-  libIterativeRobot::JoystickChannel* RightY = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+  libIterativeRobot::JoystickChannel* angleAdjustmentJoy = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
+  /*libIterativeRobot::JoystickChannel* RightY = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_RIGHT_Y);
   libIterativeRobot::JoystickChannel* LeftY = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   libIterativeRobot::JoystickChannel* RightX = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_RIGHT_X);
   libIterativeRobot::JoystickChannel* LeftX = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_X);
@@ -74,11 +75,12 @@ Robot::Robot() {
   angleAdjustmentControlPosition2->whenPressed(new MoveAngleAdjustmentFor(750));
 
   IntakeIn->whileHeld(new IntakeControlIn());
-  IntakeOut->whileHeld(new IntakeControlOut());
+  IntakeOut->whileHeld(new IntakeControlOut());*/
 
   //ClawOpen->whileHeld(new ClawControl(true));
   //ClawClose->whileHeld(new ClawControl(false));
 
+  angleAdjustmentJoy->whilePastThreshold(new AngleAdjustmentWithJoy());
 }
 
 void Robot::robotInit() {
