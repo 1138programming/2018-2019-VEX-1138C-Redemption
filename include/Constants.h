@@ -19,10 +19,12 @@ const int frontRightBasePort = 2;
 const int backLeftBasePort = 3;
 const int backRightBasePort = 4;
 
-const int angleAdjustmentMotor1Port = 6;
-const int angleAdjustmentMotor2Port = 8;
+//const int angleAdjustmentMotor1Port = 6;
+//const int angleAdjustmentMotor2Port = 8;
 const int puncherMotorPort = 7;
+const int puncherMotor2Port = 9;
 const int intakeMotorPort = 5;
+const int armMotorPort = 6;
 //const int clawPort = 6;
 
 //Motor and encoder constants
