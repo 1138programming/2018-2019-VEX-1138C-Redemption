@@ -23,7 +23,7 @@ void ArmWithJoy::execute() {
 }
 
 bool ArmWithJoy::isFinished() {
-  return false;
+  return true;
 }
 
 void ArmWithJoy::end() {

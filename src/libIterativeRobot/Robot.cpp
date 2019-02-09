@@ -22,6 +22,9 @@
 #include "libIterativeRobot/commands/MoveArmForward.h"
 #include "libIterativeRobot/commands/MoveArmBackward.h"
 
+
+#include "libIterativeRobot/commands/TwoFlagAuton.h"
+#include "libIterativeRobot/commands/TwoFlagAutonBlue.h"
 #include "libIterativeRobot/commands/FlagPlatformAuton.h"
 #include "libIterativeRobot/commands/FlagPlatformAutonBlue.h"
 #include "libIterativeRobot/commands/FrontTile.h"
@@ -72,7 +75,7 @@ Robot::Robot() {
   // Add commands to be run to buttons
 
   //RightY->whilePastThreshold(angleAdjustmentCommand);
-  RightY->whilePastTheshold(armWithJoy);
+  RightY->whilePastThreshold(armWithJoy);
   LeftY->whilePastThreshold(driveCommand);
   LeftX->whilePastThreshold(driveCommand);
 
@@ -103,15 +106,11 @@ void Robot::autonInit() {
   switch (autonChooser->getAutonChoice()) {
     case 0:
       printf("Running group %d\n", 1);
-      autonGroup = new FlagPlatformAuton();
+      autonGroup = new TwoFlagAuton();
       break;
     case 1:
       printf("Running group %d\n", 1);
-      autonGroup = new FlagPlatformAutonBlue();
-      break;
-    case 2:
-      printf("Running group %d\n", 2);
-      autonGroup = new FrontTile();
+      autonGroup = new TwoFlagAutonBlue();
       break;
   }
   autonGroup->run();
