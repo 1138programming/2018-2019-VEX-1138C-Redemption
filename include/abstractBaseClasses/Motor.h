@@ -23,7 +23,7 @@ enum MotorType {
 
 class Motor {
   private:
-    const static int defaultSlewStep = 28;
+    const static int defaultSlewStep = 14;
 
     std::uint8_t channel; // Motor channel
     pros::motor_gearset_e_t gearset; // v5 motor gearset
@@ -51,15 +51,15 @@ class Motor {
     static const pros::motor_gearset_e_t defaultGearset; // Default gear set is 18, 200 rpm
     static const pros::motor_encoder_units_e_t defaultEncoderUnits; // Default encoder units are counts, or encoder ticks
 
+    // These functions are called repeatedly, updating the motor object
+    int updateSlewRate(int targetSpeed); // Doesn't work
+    void move(); // Applies the current speed to the motor
+
     Motor(std::uint8_t channel); // Constructor, takes a channel
   public:
-    // These functions are used to initialize and access the motor object
-    static void init(); // Initializes motor objects
-    static Motor* getMotor(int motorPort); // Gets a motor on the specified port, between ports 1-22
-    static Motor* getMotor(Port motorPort); // Gets a motor on the specified port, between ports A-H
-
     // These functions change something about the motor object
     void setSpeed(int speed); // Sets the speed of the motor
+    void moveTo(int target, int motorSpeed = 150);
     void setThreshold(int threshold); // Sets a threshold for the motor's speed
     void reverse(); // Reverses the motor
     void setMultiplier(float multiplier); // Sets a multiplier to apply to the motor's speed
@@ -73,12 +73,16 @@ class Motor {
     std::int32_t getEncoderValue(); // Gets the encoder value of the motor
     MotorType getMotorType(); // Gets the type of motor
 
+    void setSlewStep(int newSlew);
+
     pros::Motor* getMotorObject();
 
-    // These functions are called repeatedly, updating the motor object
-    int updateSlewRate(int targetSpeed); // Doesn't work
-    void move(); // Applies the current speed to the motor
+    // Static methods
     static void periodicUpdate(); // Updates all motors. Calls the move function on all motors
+
+    // These functions are used to get a motor by port
+    static Motor* getMotor(int motorPort); // Gets a motor on the specified port, between ports 1-22
+    static Motor* getMotor(Port motorPort); // Gets a motor on the specified port, between ports A-H
 };
 
 #endif

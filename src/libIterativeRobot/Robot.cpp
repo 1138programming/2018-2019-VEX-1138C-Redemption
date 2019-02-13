@@ -28,6 +28,8 @@
 #include "libIterativeRobot/commands/FlagPlatformAuton.h"
 #include "libIterativeRobot/commands/FlagPlatformAutonBlue.h"
 #include "libIterativeRobot/commands/FrontTile.h"
+#include "libIterativeRobot/commands/FinalAutonRed.h"
+#include "libIterativeRobot/commands/FinalAutonBlue.h"
 
 Base*  Robot::base = 0;
 //AngleAdjustment*   Robot::angleAdjustment = 0;
