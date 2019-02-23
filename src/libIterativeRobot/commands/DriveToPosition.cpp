@@ -39,7 +39,7 @@ bool DriveToPosition::isFinished() {
 
 void DriveToPosition::end() {
   // Code that runs when isFinished() returns true.
-  Robot::base->move(0, 0);
+  Robot::base->moveBaseTo(0, 0);
 }
 
 void DriveToPosition::interrupted() {

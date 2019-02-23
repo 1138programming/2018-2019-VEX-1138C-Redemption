@@ -6,6 +6,9 @@
 #include "subsystems/Base.h"
 #include "commands/CommandGroup.h"
 #include "subsystems/Arm.h"
+#include "subsystems/Intake.h"
+#include "subsystems/Puncher.h"
+#include "subsystems/AngleAdjustment.h"
 
 class Robot : public libIterativeRobot::RobotBase {
   private:

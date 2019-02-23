@@ -1,10 +1,9 @@
 #include "libIterativeRobot/commands/DriveWithJoy.h"
+
 #include "libIterativeRobot/Robot.h"
-#include "Constants.h"
 
 DriveWithJoy::DriveWithJoy() {
   requires(Robot::base);
-  this->priority = 2;
 }
 
 bool DriveWithJoy::canRun() {
@@ -14,16 +13,18 @@ bool DriveWithJoy::canRun() {
 void DriveWithJoy::initialize() {
   // Perform any initialization steps for this command here, not in the
   // constructor
-  rightSideSpeed = 2 * (Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) - Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X));
-  leftSideSpeed = 2 * (Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) + Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X));
 }
 
 void DriveWithJoy::execute() {
-  Robot::base->move(leftSideSpeed, rightSideSpeed);
+  // Code that runs when this command is scheduled to run
+  Robot::base->moveBase(
+    -Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y),
+    -Robot::mainController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y)
+  );
 }
 
 bool DriveWithJoy::isFinished() {
-  return true;
+  return true; // This is the default va  lue anyways, so this method can be removed
 }
 
 void DriveWithJoy::end() {

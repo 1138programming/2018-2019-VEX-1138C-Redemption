@@ -17,7 +17,7 @@ void StopBase::initialize() {
 }
 
 void StopBase::execute() {
-  Robot::base->move(0, 0);
+  Robot::base->moveBase(0, 0);
 }
 
 bool StopBase::isFinished() {

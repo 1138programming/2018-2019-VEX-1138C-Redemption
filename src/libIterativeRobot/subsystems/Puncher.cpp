@@ -1,4 +1,5 @@
 #include "main.h"
+#include "libIterativeRobot/subsystems/Puncher.h"
 #include "libIterativeRobot/commands/StopPuncher.h"
 #include "pros/motors.hpp"
 

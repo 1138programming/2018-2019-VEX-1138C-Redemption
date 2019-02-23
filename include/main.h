@@ -43,14 +43,14 @@
 #include "abstractBaseClasses/PIDController.h"
 
 // Subsystems
-#include "libIterativeRobot/subsystems/Subsystem.h"
-#include "libIterativeRobot/subsystems/AngleAdjustment.h"
-#include "libIterativeRobot/subsystems/Puncher.h"
-#include "libIterativeRobot/subsystems/Base.h"
-#include "libIterativeRobot/subsystems/Intake.h"
+// #include "libIterativeRobot/subsystems/Subsystem.h"
+// #include "libIterativeRobot/subsystems/AngleAdjustment.h"
+// #include "libIterativeRobot/subsystems/Puncher.h"
+// #include "libIterativeRobot/subsystems/Base.h"
+// #include "libIterativeRobot/subsystems/Intake.h"
 
 //#include "libIterativeRobot/subsystems/Claw.h"
-#include "libIterativeRobot/subsystems/ExampleSubsystem.h"
+//#include "libIterativeRobot/subsystems/ExampleSubsystem.h"
 
 #include "libIterativeRobot/AutonChooser.h"
 

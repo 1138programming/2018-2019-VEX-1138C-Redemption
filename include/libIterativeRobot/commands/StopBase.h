@@ -2,6 +2,7 @@
 #define _COMMANDS_STOPBASE_H_
 
 #include "libIterativeRobot/commands/Command.h"
+#include "libIterativeRobot/subsystems/Base.h"
 
 class StopBase: public libIterativeRobot::Command {
   public:

@@ -14,10 +14,10 @@
 #define MAX_FOLLOWERS 3
 
 // Motor ports
-const int frontLeftBasePort = 1;
-const int frontRightBasePort = 2;
-const int backLeftBasePort = 3;
-const int backRightBasePort = 4;
+const int leftFrontBaseMotorPort = 1;
+const int rightFrontBaseMotorPort = 2;
+const int leftBackBaseMotorPort = 3;
+const int rightBackBaseMotorPort = 4;
 
 //const int angleAdjustmentMotor1Port = 6;
 //const int angleAdjustmentMotor2Port = 8;
@@ -33,6 +33,8 @@ const int KMaxJoystickValue = 200;
 const int KMotorPosition = 200;
 const int encoderTicks = 360; // Encoder ticks in one revolution
 const float rotationsPerInch = 31.400156410256; // TODO check if this is correct
+
+constexpr float slowSpeedMultiplier = 0.5;
 
 // IME addresses
 const unsigned char exampleIMEAddress = 0;

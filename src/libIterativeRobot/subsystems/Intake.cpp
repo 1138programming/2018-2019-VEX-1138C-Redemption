@@ -1,4 +1,5 @@
 #include "main.h"
+#include "libIterativeRobot/subsystems/Intake.h"
 #include "libIterativeRobot/commands/StopIntake.h"
 
 Intake::Intake() {

@@ -2,7 +2,9 @@
 #define _SUBSYSTEMS_PUNCHER_H_
 
 #include "./Subsystem.h"
-#include "api.h"
+#include "main.h"
+
+#include "abstractBaseClasses/Motor.h"
 
 class Puncher : public libIterativeRobot::Subsystem {
   private:
