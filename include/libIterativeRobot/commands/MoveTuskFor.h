@@ -1,9 +1,9 @@
-#ifndef _COMMANDS_MOVEANGLEADJUSTMENTFOR_H_
-#define _COMMANDS_MOVEANGLEADJUSTMENTFOR_H_
+#ifndef _COMMANDS_MOVETUSKFOR_H_
+#define _COMMANDS_MOVETUSKFOR_H_
 
 #include "libIterativeRobot/commands/Command.h"
 
-class MoveAngleAdjustmentFor: public libIterativeRobot::Command {
+class MoveTuskFor: public libIterativeRobot::Command {
   public:
     bool canRun();
     void initialize();
@@ -11,11 +11,11 @@ class MoveAngleAdjustmentFor: public libIterativeRobot::Command {
     bool isFinished();
     void end();
     void interrupted();
-    MoveAngleAdjustmentFor(unsigned int duration, int speed = 127);
+    MoveTuskFor(unsigned int duration, int speed = 127);
   private:
     unsigned int duration;
     unsigned int speed;
     unsigned int startTime;
 };
 
-#endif // _COMMANDS_MOVEANGLEADJUSTMENTFOR_H_
+#endif // _COMMANDS_MOVETUSKFOR_H_

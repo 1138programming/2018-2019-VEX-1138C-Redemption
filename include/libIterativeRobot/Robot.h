@@ -8,7 +8,7 @@
 #include "subsystems/Arm.h"
 #include "subsystems/Intake.h"
 #include "subsystems/Puncher.h"
-#include "subsystems/AngleAdjustment.h"
+#include "subsystems/Tusk.h"
 
 class Robot : public libIterativeRobot::RobotBase {
   private:
@@ -26,7 +26,7 @@ class Robot : public libIterativeRobot::RobotBase {
 
     // Pointers to every subsystem on the robot:
     static Base* base;
-    //static AngleAdjustment* angleAdjustment;
+    static Tusk* tusk;
     static Puncher* puncher;
     static Intake* intake;
     static Arm* arm;

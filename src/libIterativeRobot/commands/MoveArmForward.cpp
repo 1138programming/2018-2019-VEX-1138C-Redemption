@@ -5,7 +5,6 @@
 
 MoveArmForward::MoveArmForward() {
   requires(Robot::arm);
-  this->priority = DefaultCommandPriority; // Lowest priority
 }
 
 bool MoveArmForward::canRun() {
@@ -18,8 +17,8 @@ void MoveArmForward::initialize() {
 }
 
 void MoveArmForward::execute() {
-  Robot::arm->move(150);
-  //printf("Stopping arm\n");
+  Robot::arm->move(KMaxMotorSpeed);
+  printf("Moving tusk\n");
 }
 
 bool MoveArmForward::isFinished() {

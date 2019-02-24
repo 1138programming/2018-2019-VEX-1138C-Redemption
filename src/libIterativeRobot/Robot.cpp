@@ -4,10 +4,10 @@
 #include "libIterativeRobot/events/JoystickChannel.h"
 
 #include "libIterativeRobot/commands/StopBase.h"
-#include "libIterativeRobot/commands/StopAngleAdjustment.h"
-#include "libIterativeRobot/commands/AngleAdjustmentControlUp.h"
-#include "libIterativeRobot/commands/AngleAdjustmentControlDown.h"
-#include "libIterativeRobot/commands/MoveAngleAdjustmentFor.h"
+#include "libIterativeRobot/commands/StopTusk.h"
+#include "libIterativeRobot/commands/TuskControlUp.h"
+#include "libIterativeRobot/commands/TuskControlDown.h"
+#include "libIterativeRobot/commands/MoveTuskFor.h"
 #include "libIterativeRobot/commands/DriveWithJoy.h"
 #include "libIterativeRobot/commands/MovePuncherFor.h"
 #include "libIterativeRobot/commands/PuncherControl.h"
@@ -16,7 +16,7 @@
 #include "libIterativeRobot/commands/MoveIntakeFor.h"
 #include "libIterativeRobot/commands/IntakeControlIn.h"
 #include "libIterativeRobot/commands/IntakeControlOut.h"
-#include "libIterativeRobot/commands/AngleAdjustmentWithJoy.h"
+#include "libIterativeRobot/commands/TuskWithJoy.h"
 #include "libIterativeRobot/commands/StopArm.h"
 #include "libIterativeRobot/commands/ArmWithJoy.h"
 #include "libIterativeRobot/commands/MoveArmForward.h"
@@ -32,7 +32,7 @@
 #include "libIterativeRobot/commands/FinalAutonBlue.h"
 
 Base*  Robot::base = 0;
-//AngleAdjustment*   Robot::angleAdjustment = 0;
+Tusk*   Robot::tusk = 0;
 Puncher*   Robot::puncher = 0;
 Intake*   Robot::intake = 0;
 Arm* Robot::arm = 0;
@@ -47,7 +47,7 @@ Robot::Robot() {
   autonGroup = NULL;
   // Initialize any subsystems
   base = new Base();
-  //angleAdjustment  = new AngleAdjustment();
+  tusk  = new Tusk();
   puncher = new Puncher();
   intake = new Intake();
   arm = new Arm();
@@ -63,33 +63,38 @@ Robot::Robot() {
   libIterativeRobot::JoystickChannel* LeftY = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   libIterativeRobot::JoystickChannel* RightX = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_RIGHT_X);
   libIterativeRobot::JoystickChannel* LeftX = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_X);
-  //libIterativeRobot::JoystickButton* angleAdjustmentControlPosition1 = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_DOWN);
-  //libIterativeRobot::JoystickButton* angleAdjustmentControlPosition2= new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
+  //libIterativeRobot::JoystickButton* tuskControlPosition1 = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_DOWN);
+  //libIterativeRobot::JoystickButton* tuskControlPosition2= new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
   libIterativeRobot::JoystickButton* PuncherShoot = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_RIGHT);
   libIterativeRobot::JoystickButton* PuncherPrime = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_LEFT);
   libIterativeRobot::JoystickButton* IntakeOut = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L1);
   libIterativeRobot::JoystickButton* IntakeIn = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L2);
   libIterativeRobot::JoystickButton* GoPuncher = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R1);
+  libIterativeRobot::JoystickButton* TuskUp = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_A);
+  libIterativeRobot::JoystickButton* TuskDown = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_X);
 
   DriveWithJoy* driveCommand = new DriveWithJoy();
-  //AngleAdjustmentWithJoy* angleAdjustmentCommand = new AngleAdjustmentWithJoy();
-  ArmWithJoy* armWithJoy = new ArmWithJoy();
+  //TuskWithJoy* tuskCommand = new TuskWithJoy();
+  // ArmWithJoy* armWithJoy = new ArmWithJoy();
   // Add commands to be run to buttons
 
-  //RightY->whilePastThreshold(angleAdjustmentCommand);
-  RightY->whilePastThreshold(armWithJoy);
+  RightY->whilePastThreshold(driveCommand);
+  //RightY->whilePastThreshold(armWithJoy);
   LeftY->whilePastThreshold(driveCommand);
-  LeftX->whilePastThreshold(driveCommand);
+  //LeftX->whilePastThreshold(driveCommand);
 
   PuncherShoot->whileHeld(new PuncherControl());
   PuncherPrime->whenPressed(new MovePuncherFor(750));
   GoPuncher->whileHeld(new PuncherControl());
 
-  //angleAdjustmentControlPosition1->whenPressed(new MoveAngleAdjustmentFor(750));
-  //angleAdjustmentControlPosition2->whenPressed(new MoveAngleAdjustmentFor(750));
+  //tuskControlPosition1->whenPressed(new MoveTuskFor(750));
+  //tuskControlPosition2->whenPressed(new MoveTuskFor(750));
 
   IntakeIn->whileHeld(new IntakeControlIn());
   IntakeOut->whileHeld(new IntakeControlOut());
+
+  TuskUp->whileHeld(new MoveArmForward());
+  TuskDown->whileHeld(new MoveArmBackward());
 
   //ClawOpen->whileHeld(new ClawControl(true));
   //ClawClose->whileHeld(new ClawControl(false));

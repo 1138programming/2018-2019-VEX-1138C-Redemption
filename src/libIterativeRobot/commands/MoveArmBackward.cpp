@@ -5,7 +5,6 @@
 
 MoveArmBackward::MoveArmBackward() {
   requires(Robot::arm);
-  this->priority = DefaultCommandPriority; // Lowest priority
 }
 
 bool MoveArmBackward::canRun() {
@@ -18,7 +17,7 @@ void MoveArmBackward::initialize() {
 }
 
 void MoveArmBackward::execute() {
-  Robot::arm->move(-150);
+  Robot::arm->move(-KMaxMotorSpeed);
   //printf("Stopping arm\n");
 }
 

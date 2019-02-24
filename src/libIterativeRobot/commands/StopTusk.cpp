@@ -1,36 +1,36 @@
-#include "libIterativeRobot/commands/StopArm.h"
+#include "libIterativeRobot/commands/StopTusk.h"
 #include "libIterativeRobot/Robot.h"
 #include "Constants.h"
 
-StopArm::StopArm() {
-  requires(Robot::arm);
+StopTusk::StopTusk() {
+  requires(Robot::tusk);
   this->priority = DefaultCommandPriority; // Lowest priority
 }
 
-bool StopArm::canRun() {
+bool StopTusk::canRun() {
   return true; // This is the default value anyways, so this method can be removed
 }
 
-void StopArm::initialize() {
+void StopTusk::initialize() {
   // Perform any initialization steps for this command here, not in the
   // constructor
-  // Robot::arm->move(0);
+  Robot::tusk->move(0);
 }
 
-void StopArm::execute() {
-  Robot::arm->move(0);
-  //printf("Stopping arm\n");
+void StopTusk::execute() {
+  Robot::tusk->move(0);
+  //printf("Stopping tusk\n");
 }
 
-bool StopArm::isFinished() {
+bool StopTusk::isFinished() {
   return true;
 }
 
-void StopArm::end() {
+void StopTusk::end() {
   // Code that runs when isFinished() returns true.
 }
 
-void StopArm::interrupted() {
+void StopTusk::interrupted() {
   // Code that runs when this command is interrupted by another one
   // with a higher priority.
 }
