@@ -16,6 +16,8 @@ AutonChooser::AutonChooser() {
 
   autonNames.push_back("Red Front");
   autonNames.push_back("Blue Front");
+  autonNames.push_back("Red back");
+  autonNames.push_back("Blue back");
   //autonNames.push_back("Blue Auton\0");
 
   numAutons = autonNames.size();
@@ -34,7 +36,6 @@ lv_res_t AutonChooser::updateAutonName(lv_obj_t* btn) {
       auton--;
   }
   printf("Auton is %d, size is %d\n", auton, autonNames.size());
-  pros::delay(1000);
   lv_label_set_text(autonName, autonNames[auton]);
   return LV_RES_OK;
 }

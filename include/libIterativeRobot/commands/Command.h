@@ -27,12 +27,12 @@ class Command {
 
     std::vector<Subsystem*>& getRequirements();
 
-    virtual bool canRun(); // Whether or not the command can run right now. If false, it is ignored
-    virtual void initialize(); // Set up the command for running
-    virtual void execute(); // Run the command
-    virtual bool isFinished(); // Whether or not the command is finished. The execute() function is called continuously until this is true or the command is interrupted
-    virtual void end(); // Run when command is finished
-    virtual void interrupted(); // Run when command was interrupted by one with a higher priority
+    virtual bool canRun() = 0; // Whether or not the command can run right now. If false, it is ignored
+    virtual void initialize() = 0; // Set up the command for running
+    virtual void execute() = 0; // Run the command
+    virtual bool isFinished() = 0; // Whether or not the command is finished. The execute() function is called continuously until this is true or the command is interrupted
+    virtual void end() = 0; // Run when command is finished
+    virtual void interrupted() = 0; // Run when command was interrupted by one with a higher priority
 
     virtual void run(); // Runs this command. May be called anywhere.
     virtual void stop(); // Stops this command while it is running. May be called anywhere.

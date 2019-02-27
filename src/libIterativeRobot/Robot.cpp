@@ -67,8 +67,8 @@ Robot::Robot() {
   //libIterativeRobot::JoystickButton* tuskControlPosition2= new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
   libIterativeRobot::JoystickButton* PuncherShoot = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_RIGHT);
   libIterativeRobot::JoystickButton* PuncherPrime = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_LEFT);
-  libIterativeRobot::JoystickButton* IntakeOut = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L1);
-  libIterativeRobot::JoystickButton* IntakeIn = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L2);
+  libIterativeRobot::JoystickButton* IntakeOut = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L2);
+  libIterativeRobot::JoystickButton* IntakeIn = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_L1);
   libIterativeRobot::JoystickButton* GoPuncher = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R1);
   libIterativeRobot::JoystickButton* TuskUp = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_A);
   libIterativeRobot::JoystickButton* TuskDown = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_X);
@@ -118,6 +118,14 @@ void Robot::autonInit() {
     case 1:
       printf("Running group %d\n", 1);
       autonGroup = new TwoFlagAutonBlue();
+      break;
+    case 2:
+      printf("Running groupd %d\n", 2);
+      autonGroup = new FlagPlatformAuton();
+      break;
+    case 3:
+      printf("Running group %d\n", 3);
+      autonGroup = new FlagPlatformAutonBlue();
       break;
   }
   autonGroup->run();

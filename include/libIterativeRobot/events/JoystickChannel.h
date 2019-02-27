@@ -3,31 +3,26 @@
 
 #include "api.h"
 #include "main.h"
-#include "./EventListener.h"
+#include "./Trigger.h"
 #include "../commands/Command.h"
 
 namespace libIterativeRobot {
 
-// Enum for joystick channels
-/*enum Channels {
-  ChRightY=1,
-  ChRightX,
-  ChLeftY,
-  ChLeftX,
-};*/
-
-class JoystickChannel : public EventListener {
+class JoystickChannel : public Trigger {
   private:
     pros::Controller* controller;
     pros::controller_analog_e_t channel; // The channel to check
-    int threshold = kDefaultThreshold; // The treshold for the joystick value
-    Command* pastThresholdCommand = NULL; // Command or command group run if the joystick value is past the threshold
+    std::int32_t threshold = kDefaultThreshold; // The treshold for the joystick value
   protected:
-    virtual void checkConditions();
   public:
     static const std::int32_t kDefaultThreshold = 10; // Default threshold
     JoystickChannel(pros::Controller* controller, pros::controller_analog_e_t channel);
-    void whilePastThreshold(Command* pastThresholdCommand, std::int32_t threshold = kDefaultThreshold);
+    void whenPassingThresholdForward(Command* command, Action action = RUN);
+    void whilePastThreshold(Command* command, Action action = RUN);
+    void whenPassingThresholdReverse(Command* command, Action action = RUN);
+    void whileWithinThreshold(Command* command, Action action = RUN);
+    void setThreshold(std::int32_t threshold);
+    bool get();
 };
 
 };
